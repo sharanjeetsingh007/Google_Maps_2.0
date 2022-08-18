@@ -4,7 +4,7 @@ The project is created to demonstrate front-end skills and usage of diffrent API
 
 # Demo
 
-https://meek-biscochitos-a48668.netlify.app
+https://dashing-treacle-3b35c1.netlify.app
 
 # Features
 
