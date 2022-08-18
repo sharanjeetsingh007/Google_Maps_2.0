@@ -1,0 +1,87 @@
+.map {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  /* border: 1px solid red; */
+  z-index: 1;
+}
+
+.map__container {
+  width: 100vw;
+  height: 100vh;
+  /* border: 1px solid red; */
+}
+
+.infowindow__main {
+  padding: 9px 1px 1px 8px;
+}
+
+.infowindow__main > .image {
+  width: 300px;
+  height: 190px;
+
+  margin: 0 auto;
+}
+
+.infowindow__main > .image > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.infowindow__name {
+  margin-top: 10px;
+}
+
+.infowindow__item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* border: 2px solid black; */
+  /* width: 240px; */
+  padding: 4px;
+}
+
+.infowindow__item > p:nth-child(1) {
+  font-weight: 500;
+}
+
+.map__ui {
+  /* width: 390px; */
+  height: 350px;
+  position: absolute;
+  /* padding-right: 10px; */
+  /* border: 2px solid red; */
+  z-index: 2;
+  top: 30%;
+  background-color: white;
+  display: flex;
+  left: 1%;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+
+.home__btn {
+  /* border: 3px solid blue; */
+  position: absolute;
+  z-index: 2;
+  right: 0;
+}
+
+.services__wrapper {
+  padding: 2px 10px 10px 10px;
+  /* width: 500px; */
+}
+
+.skeleton {
+  animation: skeleton-loading 1s linear infinite alternate;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-color: hsl(200, 20%, 80%);
+  }
+  100% {
+    background-color: hsl(200, 20%, 95%);
+  }
+}

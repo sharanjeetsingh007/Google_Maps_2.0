@@ -1,0 +1,19 @@
+.sidebar__main {
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+
+  /* align-content: space-around; */
+  /* background-color: rgba(0, 0, 0, 0.099); */
+  height: 350px;
+}
+.top {
+  flex: 1;
+}
+.icon {
+  margin: 10px 0;
+}
+
+/* .icon > button { */
+/* background-color: rgba(0, 0, 0, 0.099); */
+/* } */

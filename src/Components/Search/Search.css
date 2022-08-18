@@ -1,0 +1,82 @@
+.search {
+  padding-top: 13px;
+}
+
+.search > div > input {
+  width: 200px;
+  border-bottom: 1px solid black;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  margin-top: 0 !important;
+  padding: 10px 10px 10px 0;
+  outline: none;
+}
+.search > div > input:hover {
+  border-bottom: 1px solid #0976b8;
+}
+
+.nearby {
+  overflow: scroll;
+}
+
+.nearby > p {
+  margin-top: 15px;
+  margin-bottom: 10px;
+  font-size: 12px;
+  color: gray;
+}
+
+.nearby__card:nth-child(1) {
+  margin-top: 2px;
+}
+
+.nearby__card {
+  border-radius: 10px;
+  padding: 10px;
+  border: 1px solid gray;
+  display: grid;
+  grid-template-columns: 50px 1fr;
+  grid-template-rows: 3;
+  font-size: 12px;
+  margin-bottom: 10px;
+  width: 200px;
+  height: 90px;
+  /* height: 100px; */
+  column-gap: 20px;
+  cursor: pointer;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  box-sizing: content-box;
+  /* overflow: scroll; */
+}
+
+.nearby__card:active {
+  border: 2px solid #0874b4 !important;
+}
+
+/* .nearby__card > p {
+} */
+
+.nearby__card:hover {
+  border: 2px solid gray;
+}
+
+.address {
+  /* width: 20px; */
+  /* height: 10px; */
+  overflow: scroll;
+}
+
+.name {
+  height: 30px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.circular__loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+}
