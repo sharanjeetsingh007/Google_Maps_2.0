@@ -4,7 +4,7 @@ The project is created to demonstrate front-end skills and usage of diffrent API
 
 # Demo
 
-https://dashing-treacle-3b35c1.netlify.app
+https://incredible-naiad-507cfe.netlify.app
 
 # Features
 

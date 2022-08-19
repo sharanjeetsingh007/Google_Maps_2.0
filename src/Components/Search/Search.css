@@ -80,3 +80,8 @@
   justify-content: center;
   margin-top: 20px;
 }
+
+.pac-container {
+  border: 1px solid gray;
+  box-shadow: none;
+}

@@ -1,17 +1,12 @@
-import { ConstructionOutlined } from '@mui/icons-material'
-import { Combobox, ComboboxInput, ComboboxOption, ComboboxPopover } from '@reach/combobox'
-import { GoogleMap, useLoadScript, MarkerF, InfoWindow, Autocomplete, DirectionsRenderer } from "@react-google-maps/api";
-
+import { Autocomplete } from "@react-google-maps/api";
 import React, { useEffect, useRef, useCallback, useState } from 'react'
 import usePlacesAutocomplete, { getGeocode, getLatLng } from 'use-places-autocomplete'
 import "./Search.css"
-
-import TextField from '@mui/material/TextField';
 import CircularProgress from '@mui/material/CircularProgress';
 
 
 
-function Search({ changeLoadingSpinnerCircle, LoadingSpinnerCircle, setNearbyPlaces, panTo, changeSpinner, changeMarker, setLoadingSpinnerState, changeNearbyPlacesType, valueInput, getValue, changeSearchInput, searchInput, nearbyPlacesOnLoad, changeNearbyMarker, nearbyMarker }) {
+function Search({ SearchRef, changeLoadingSpinnerCircle, LoadingSpinnerCircle, setNearbyPlaces, panTo, changeSpinner, changeMarker, setLoadingSpinnerState, changeNearbyPlacesType, valueInput, getValue, changeSearchInput, searchInput, nearbyPlacesOnLoad, changeNearbyMarker, nearbyMarker }) {
 
     const [modifiedNearby, setModifiedNearby] = useState([])
 
@@ -40,7 +35,6 @@ function Search({ changeLoadingSpinnerCircle, LoadingSpinnerCircle, setNearbyPla
 
 
 
-    const searchRef = useRef();
     useEffect(() => {
         function initAutocomplete() {
 
@@ -54,7 +48,8 @@ function Search({ changeLoadingSpinnerCircle, LoadingSpinnerCircle, setNearbyPla
                 // gettingGeoLocation(searchInput)
                 return;
 
-            } else if (searchInput == "gyms" || searchInput == "Gyms") {
+            }
+            else if (searchInput == "gyms" || searchInput == "Gyms") {
                 changeNearbyPlacesType(searchInput)
                 getValue(searchInput)
             }
@@ -73,12 +68,20 @@ function Search({ changeLoadingSpinnerCircle, LoadingSpinnerCircle, setNearbyPla
                 });
             }
         }
-        initAutocomplete();
+
+        initAutocomplete()
     }, [searchInput])
 
 
+    useEffect(() => {
+        const newArray = nearbyPlacesOnLoad.splice(1, 2)
+        setModifiedNearby(newArray)
+        changeLoadingSpinnerCircle(false)
+    }, [nearbyPlacesOnLoad])
+
+
     const gettingGeoLocation = async (value) => {
-        // console.log(typeof (value), 'valueeeee')
+        // console.log(value, 'valueeeee issss')
 
         try {
             const results = await getGeocode({ "address": value });
@@ -91,7 +94,7 @@ function Search({ changeLoadingSpinnerCircle, LoadingSpinnerCircle, setNearbyPla
         }
         catch (err) {
 
-            console.log(err, "err in combox converting address to latlong")
+            // console.log(err, "err in combox converting address to latlong")
         }
 
     }
@@ -108,8 +111,14 @@ function Search({ changeLoadingSpinnerCircle, LoadingSpinnerCircle, setNearbyPla
     return (<>
         <div className='search'>
             <Autocomplete
+
             >
-                <input type="text" id="pac-input" placeholder="Search address" value={searchInput} onChange={(e) => changeSearchInput(e.target.value)}
+                <input type="text" id="pac-input" placeholder="Search address"
+                    ref={SearchRef}
+                    value={searchInput}
+                    onChange={(e) => {
+                        changeSearchInput(e.target.value)
+                    }}
                 />
             </Autocomplete>
             <div className='nearby'>

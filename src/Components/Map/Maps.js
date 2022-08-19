@@ -69,7 +69,7 @@ function Maps({ changeSidebarProps, sidebarProp }) {
     const [LoadingSpinnerCircle, setLoadingSpinnerCircle] = useState(true)
 
 
-
+    const SearchRef = useRef()
     const fromRef = useRef()
     const toRef = useRef()
 
@@ -162,7 +162,8 @@ function Maps({ changeSidebarProps, sidebarProp }) {
                 })
             })
         } else {
-            // console.log("Not Available 👹");
+            alert("Required Location accesss for the app");
+
         }
     }, [])
 
@@ -181,7 +182,8 @@ function Maps({ changeSidebarProps, sidebarProp }) {
             mapState.nearbySearch(request, async (results, status) => {
                 if (status === window.google.maps.places.PlacesServiceStatus.OK) {
                     await setNearbyPlacesOnLoad(results.map((result) => {
-                        if (result.photos) {
+
+                        if (result.photos && result !== undefined) {
                             return {
                                 lat: result.geometry.location.lat(),
                                 lng: result.geometry.location.lng(),
@@ -344,6 +346,7 @@ function Maps({ changeSidebarProps, sidebarProp }) {
                             changeNearbyMarker={changeNearbyMarker}
                             nearbyMarker={nearbyMarker}
                             setNearbyPlaces={setNearbyPlaces}
+                            SearchRef={SearchRef}
                         />}
                         {sidebarProp == "navigation" && <Navigation
                             changeDirectionRoute={changeDirectionRoute}
