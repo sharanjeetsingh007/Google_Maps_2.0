@@ -45,6 +45,7 @@ const options = {
 
 const libraries = ["places"]
 
+
 function Maps({ changeSidebarProps, sidebarProp }) {
 
     const [marker, setMarker] = useState({});
@@ -67,6 +68,7 @@ function Maps({ changeSidebarProps, sidebarProp }) {
     const [skletonLoading, setSkletionLoading] = useState(true)
     const [LoadingSpinnerState, setLoadingSpinnerState] = useState(false)
     const [LoadingSpinnerCircle, setLoadingSpinnerCircle] = useState(true)
+
 
 
     const SearchRef = useRef()
@@ -131,6 +133,7 @@ function Maps({ changeSidebarProps, sidebarProp }) {
         setMapState(PlaceNearbyService)
         setOriginlMap(map)
 
+
         if ("geolocation" in navigator) {
             navigator.geolocation.getCurrentPosition((position) => {
 
@@ -146,15 +149,19 @@ function Maps({ changeSidebarProps, sidebarProp }) {
                     if (status === window.google.maps.places.PlacesServiceStatus.OK) {
                         await setNearbyPlacesOnLoad(results.map((result) => {
                             if (result.photos) {
+                                if (result == undefined) {
+                                    console.log(result, 'result in photos')
+
+                                }
                                 return {
-                                    lat: result.geometry.location.lat(),
-                                    lng: result.geometry.location.lng(),
+                                    lat: result?.geometry?.location?.lat(),
+                                    lng: result?.geometry?.location?.lng(),
                                     image: result?.photos[0]?.getUrl(),
-                                    name: result.name,
-                                    rating: result.rating,
+                                    name: result?.name,
+                                    rating: result?.rating,
                                     // isOpen: result.opening_hours.isOpen(),
-                                    types: result.types,
-                                    address: result.vicinity,
+                                    types: result?.types,
+                                    address: result?.vicinity,
                                 }
                             }
                         }))
@@ -166,6 +173,41 @@ function Maps({ changeSidebarProps, sidebarProp }) {
 
         }
     }, [])
+
+
+
+
+    useEffect(() => {
+        if (mapState) {
+            let request = {
+                location: { lat: latitude, lng: longitude },
+                rankBy: rankDistance,
+                keyword: "parks",
+                // radius: 200 * 1000,
+            };
+            mapState.nearbySearch(request, async (results, status) => {
+                if (status === window.google.maps.places.PlacesServiceStatus.OK) {
+                    await setNearbyPlacesOnLoad(results.map((result) => {
+                        if (result.photos) {
+
+                            return {
+                                lat: result.geometry.location.lat(),
+                                lng: result.geometry.location.lng(),
+                                image: result?.photos[0]?.getUrl(),
+                                name: result.name,
+                                rating: result.rating,
+                                // isOpen: result.opening_hours.isOpen(),
+                                types: result.types,
+                                address: result.vicinity,
+                            }
+                        }
+                    }))
+                }
+            })
+        }
+    }, [sidebarProp])
+
+
 
     useEffect(() => {
         setMarker({ lat: latitude, lng: longitude })
@@ -180,10 +222,12 @@ function Maps({ changeSidebarProps, sidebarProp }) {
         };
         if (mapState) {
             mapState.nearbySearch(request, async (results, status) => {
+
                 if (status === window.google.maps.places.PlacesServiceStatus.OK) {
                     await setNearbyPlacesOnLoad(results.map((result) => {
 
                         if (result.photos && result !== undefined) {
+
                             return {
                                 lat: result.geometry.location.lat(),
                                 lng: result.geometry.location.lng(),
@@ -319,6 +363,7 @@ function Maps({ changeSidebarProps, sidebarProp }) {
 
 
     return (<> {!isLoaded ? <LoadingSpinner /> :
+
         <> {LoadingSpinnerState && <LoadingSpinner backgroundColor={"rgba(0, 0, 0, 0.2)"} />}
             <div className='map'>
                 <div className='map__ui'
@@ -474,6 +519,7 @@ function Maps({ changeSidebarProps, sidebarProp }) {
                 </GoogleMap>
             </div>
         </>
+
 
     }
     </>

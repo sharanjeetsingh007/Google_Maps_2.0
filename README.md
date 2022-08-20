@@ -4,7 +4,7 @@ The project is created to demonstrate front-end skills and usage of diffrent API
 
 # Demo
 
-https://incredible-naiad-507cfe.netlify.app
+https://heroic-sable-6ab7b6.netlify.app
 
 # Features
 

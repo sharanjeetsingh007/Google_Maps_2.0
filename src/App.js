@@ -9,15 +9,25 @@ import {
 import Search from './Components/Search/Search';
 import Navigation from './Components/Navigation/Navigation';
 import Sidebar from './Components/Sidebar/Sidebar';
+import { GoogleMap, useLoadScript, MarkerF, InfoWindow, DirectionsRenderer } from "@react-google-maps/api";
+
+const libraries = ["places"]
+
 
 
 
 function App() {
 
   const [sidebarProp, setSideBarProp] = useState("search")
+
+
+
+
   const changeSidebarProps = (value) => {
     setSideBarProp(value)
   }
+
+
 
 
   return (

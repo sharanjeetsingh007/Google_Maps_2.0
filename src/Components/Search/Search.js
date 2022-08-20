@@ -8,6 +8,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 
 function Search({ SearchRef, changeLoadingSpinnerCircle, LoadingSpinnerCircle, setNearbyPlaces, panTo, changeSpinner, changeMarker, setLoadingSpinnerState, changeNearbyPlacesType, valueInput, getValue, changeSearchInput, searchInput, nearbyPlacesOnLoad, changeNearbyMarker, nearbyMarker }) {
 
+
     const [modifiedNearby, setModifiedNearby] = useState([])
 
 
@@ -28,9 +29,9 @@ function Search({ SearchRef, changeLoadingSpinnerCircle, LoadingSpinnerCircle, s
     }, [valueInput])
 
     useEffect(() => {
-        const newArray = nearbyPlacesOnLoad.splice(0, 2)
+        const newArray = nearbyPlacesOnLoad.splice(1, 3)
         setModifiedNearby(newArray)
-        changeLoadingSpinnerCircle(false)
+        // changeLoadingSpinnerCircle(false)
     }, [nearbyPlacesOnLoad])
 
 
@@ -76,7 +77,9 @@ function Search({ SearchRef, changeLoadingSpinnerCircle, LoadingSpinnerCircle, s
     useEffect(() => {
         const newArray = nearbyPlacesOnLoad.splice(1, 2)
         setModifiedNearby(newArray)
-        changeLoadingSpinnerCircle(false)
+        if (nearbyPlacesOnLoad.length !== 0) {
+            changeLoadingSpinnerCircle(false)
+        }
     }, [nearbyPlacesOnLoad])
 
 
@@ -90,13 +93,10 @@ function Search({ SearchRef, changeLoadingSpinnerCircle, LoadingSpinnerCircle, s
             // console.log(lat, lng)
             panTo({ lat, lng })
             changeMarker(lat, lng)
-
         }
         catch (err) {
-
             // console.log(err, "err in combox converting address to latlong")
         }
-
     }
 
     const handleClickNearby = (index) => {
@@ -107,6 +107,7 @@ function Search({ SearchRef, changeLoadingSpinnerCircle, LoadingSpinnerCircle, s
         }
         panTo(object)
     }
+
 
     return (<>
         <div className='search'>
