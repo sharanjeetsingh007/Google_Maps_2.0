@@ -29,26 +29,23 @@ function Search({ SearchRef, changeLoadingSpinnerCircle, LoadingSpinnerCircle, s
     }, [valueInput])
 
     useEffect(() => {
-        const newArray = nearbyPlacesOnLoad.splice(1, 3)
+        const filterUndefine = nearbyPlacesOnLoad.filter((data) => data !== undefined)
+        const newArray = filterUndefine.slice(0, 1)
         setModifiedNearby(newArray)
-        // changeLoadingSpinnerCircle(false)
     }, [nearbyPlacesOnLoad])
 
 
 
     useEffect(() => {
         function initAutocomplete() {
-
             if (!searchInput) {
                 return;
             }
-
             if (searchInput == "restaurants" || searchInput == "Restaurants") {
                 changeNearbyPlacesType(searchInput)
                 getValue(searchInput)
                 // gettingGeoLocation(searchInput)
                 return;
-
             }
             else if (searchInput == "gyms" || searchInput == "Gyms") {
                 changeNearbyPlacesType(searchInput)
@@ -63,7 +60,6 @@ function Search({ SearchRef, changeLoadingSpinnerCircle, LoadingSpinnerCircle, s
                 let input = document.getElementById("pac-input");
                 let searchBox = new window.google.maps.places.SearchBox(input);
                 searchBox.addListener("places_changed", function () {
-
                     gettingGeoLocation(document.getElementById("pac-input").value)
                     changeSearchInput(document.getElementById("pac-input").value);
                 });
@@ -75,7 +71,8 @@ function Search({ SearchRef, changeLoadingSpinnerCircle, LoadingSpinnerCircle, s
 
 
     useEffect(() => {
-        const newArray = nearbyPlacesOnLoad.splice(1, 2)
+        const filterUndefine = nearbyPlacesOnLoad.filter((data) => data !== undefined)
+        const newArray = filterUndefine.splice(1, 2)
         setModifiedNearby(newArray)
         if (nearbyPlacesOnLoad.length !== 0) {
             changeLoadingSpinnerCircle(false)
@@ -84,13 +81,9 @@ function Search({ SearchRef, changeLoadingSpinnerCircle, LoadingSpinnerCircle, s
 
 
     const gettingGeoLocation = async (value) => {
-        // console.log(value, 'valueeeee issss')
-
         try {
             const results = await getGeocode({ "address": value });
-            // console.log(results, 'results')
             const { lat, lng } = await getLatLng(results[0]);
-            // console.log(lat, lng)
             panTo({ lat, lng })
             changeMarker(lat, lng)
         }
@@ -111,9 +104,7 @@ function Search({ SearchRef, changeLoadingSpinnerCircle, LoadingSpinnerCircle, s
 
     return (<>
         <div className='search'>
-            <Autocomplete
-
-            >
+            <Autocomplete>
                 <input type="text" id="pac-input" placeholder="Search address"
                     ref={SearchRef}
                     value={searchInput}

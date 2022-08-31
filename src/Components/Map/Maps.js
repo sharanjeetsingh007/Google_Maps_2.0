@@ -175,7 +175,7 @@ function Maps({ changeSidebarProps, sidebarProp }) {
     }, [])
 
 
-
+    // console.log(nearbyPlacesOnLoad, "nearbyPlacesOnLoad")
 
     useEffect(() => {
         if (mapState) {
