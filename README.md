@@ -4,7 +4,7 @@ The project is created to demonstrate front-end skills and usage of diffrent API
 
 # Demo
 
-https://heroic-sable-6ab7b6.netlify.app
+https://glowing-salamander-a167ee.netlify.app/
 
 # Features
 
